@@ -1633,22 +1633,22 @@ class AsyncSubClient(async_client.AsyncClient):
         }
 
         if userId:
-            data["adminOpValue"] = {"featuredType": 4}
+            data["adminOpValue"]["featuredType"] = 4
             data = json.dumps(data)
             url = f"{self.api}/x{self.comId}/s/user-profile/{userId}/admin"
 
         elif blogId:
-            data["adminOpValue"] = {"featuredType": 1}
+            data["adminOpValue"]["featuredType"] = 1
             data = json.dumps(data)
             url = f"{self.api}/x{self.comId}/s/blog/{blogId}/admin"
 
         elif wikiId:
-            data["adminOpValue"] = {"featuredType": 1}
+            data["adminOpValue"]["featuredType"] = 1
             data = json.dumps(data)
             url = f"{self.api}/x{self.comId}/s/item/{wikiId}/admin"
 
         elif chatId:
-            data["adminOpValue"] = {"featuredType": 5}
+            data["adminOpValue"]["featuredType"] = 5
             data = json.dumps(data)
             url = f"{self.api}/x{self.comId}/s/chat/thread/{chatId}/admin"
 
@@ -1661,28 +1661,21 @@ class AsyncSubClient(async_client.AsyncClient):
     async def unfeature(self, userId: str = None, chatId: str = None, blogId: str = None, wikiId: str = None):
         data = {
             "adminOpName": 114,
-            "adminOpValue": {},
+            "adminOpValue": {"featuredType": 0},
             "timestamp": int(timestamp() * 1000)
         }
+        data = json.dumps(data)
 
         if userId:
-            data["adminOpValue"] = {"featuredType": 0}
-            data = json.dumps(data)
             url = f"{self.api}/x{self.comId}/s/user-profile/{userId}/admin"
 
         elif blogId:
-            data["adminOpValue"] = {"featuredType": 0}
-            data = json.dumps(data)
             url = f"{self.api}/x{self.comId}/s/blog/{blogId}/admin"
 
         elif wikiId:
-            data["adminOpValue"] = {"featuredType": 0}
-            data = json.dumps(data)
             url = f"{self.api}/x{self.comId}/s/item/{wikiId}/admin"
 
         elif chatId:
-            data["adminOpValue"] = {"featuredType": 0}
-            data = json.dumps(data)
             url = f"{self.api}/x{self.comId}/s/chat/thread/{chatId}/admin"
 
         else: raise exceptions.SpecifyType()

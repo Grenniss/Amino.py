@@ -1603,22 +1603,22 @@ class SubClient(client.Client):
         }
 
         if userId:
-            data["adminOpValue"] = {"featuredType": 4}
+            data["adminOpValue"]["featuredType"] = 4
             data = json.dumps(data)
             response = self.session.post(f"{self.api}/x{self.comId}/s/user-profile/{userId}/admin", headers=self.parse_headers(data=data), data=data, proxies=self.proxies, verify=self.certificatePath)
 
         elif blogId:
-            data["adminOpValue"] = {"featuredType": 1}
+            data["adminOpValue"]["featuredType"] = 1
             data = json.dumps(data)
             response = self.session.post(f"{self.api}/x{self.comId}/s/blog/{blogId}/admin", headers=self.parse_headers(data=data), data=data, proxies=self.proxies, verify=self.certificatePath)
 
         elif wikiId:
-            data["adminOpValue"] = {"featuredType": 1}
+            data["adminOpValue"]["featuredType"] = 1
             data = json.dumps(data)
             response = self.session.post(f"{self.api}/x{self.comId}/s/item/{wikiId}/admin", headers=self.parse_headers(data=data), data=data, proxies=self.proxies, verify=self.certificatePath)
 
         elif chatId:
-            data["adminOpValue"] = {"featuredType": 5}
+            data["adminOpValue"]["featuredType"] = 5
             data = json.dumps(data)
             response = self.session.post(f"{self.api}/x{self.comId}/s/chat/thread/{chatId}/admin", headers=self.parse_headers(data=data), data=data, proxies=self.proxies, verify=self.certificatePath)
 
@@ -1632,25 +1632,19 @@ class SubClient(client.Client):
             "adminOpValue": {},
             "timestamp": int(timestamp() * 1000)
         }
+        data["adminOpValue"] = {"featuredType": 0}
+        data = json.dumps(data)
 
         if userId:
-            data["adminOpValue"] = {"featuredType": 0}
-            data = json.dumps(data)
             response = self.session.post(f"{self.api}/x{self.comId}/s/user-profile/{userId}/admin", headers=self.parse_headers(data=data), data=data, proxies=self.proxies, verify=self.certificatePath)
 
         elif blogId:
-            data["adminOpValue"] = {"featuredType": 0}
-            data = json.dumps(data)
             response = self.session.post(f"{self.api}/x{self.comId}/s/blog/{blogId}/admin", headers=self.parse_headers(data=data), data=data, proxies=self.proxies, verify=self.certificatePath)
 
         elif wikiId:
-            data["adminOpValue"] = {"featuredType": 0}
-            data = json.dumps(data)
             response = self.session.post(f"{self.api}/x{self.comId}/s/item/{wikiId}/admin", headers=self.parse_headers(data=data), data=data, proxies=self.proxies, verify=self.certificatePath)
 
         elif chatId:
-            data["adminOpValue"] = {"featuredType": 0}
-            data = json.dumps(data)
             response = self.session.post(f"{self.api}/x{self.comId}/s/chat/thread/{chatId}/admin", headers=self.parse_headers(data=data), data=data, proxies=self.proxies, verify=self.certificatePath)
 
         else: raise exceptions.SpecifyType()
